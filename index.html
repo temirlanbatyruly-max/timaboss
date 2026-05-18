@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background-color: #FF453F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+    }
+    .bg {
+        position: fixed;
+        z-index: -1;
+        background-color: white;
+        width: 300px;
+        height: 500px;
+        border-radius: 1px;
+    }
+    main {
+        background-color: #FF453F;
+        box-shadow: 0 0 30px -10px black;
+        border-radius: 10px;
+        width: 300px;
+        height: fit-content;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    button {
+        background-color: white;
+        border: none;
+        color: #FF453F;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+    p {
+        margin: 0;
+        font-weight: 100;
+    }
+</style>
+<body>
+    <div class="bg">
+    </div>
+    <main>
+        <div class="container">
+        </div>
+        <button>Get Quote</button>
+    </main>
+    <script>
+        const btn = document.querySelector('button')
+        const container = document.querySelector('.container')
+        const url = 'https://dummyjson.com/quotes/random'
+
+        async function getQuote() {
+            const data = await fetch(url)
+            const response = await data.json()
+            console.log(response)
+            container.innerHTML = `
+            <p>${response.quote}</p>
+            <h4>${response.author}</h4>
+            `
+        }
+
+        btn.addEventListener('click', getQuote)
+    </script>
+</body>
+</html>
